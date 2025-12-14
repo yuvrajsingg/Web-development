@@ -175,6 +175,33 @@ export default function Home() {
           experimenting, and developing solutions that are not only functional but also impactful.
         </p>
       </section>
+
+      {/* CI/CD Update Section - Added for Assignment 4 */}
+      <section style={{
+        marginBottom: '3rem',
+        padding: '3rem',
+        borderRadius: '1.2rem',
+        background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%)',
+        border: '2px solid rgba(34, 197, 94, 0.3)',
+        textAlign: 'center'
+      }}>
+        <h2 style={{
+          fontSize: '2.5rem',
+          fontWeight: 700,
+          marginBottom: '1.5rem',
+          color: '#22c55e'
+        }}>🚀 CI/CD Update</h2>
+        <p style={{
+          fontSize: '1.05rem',
+          color: '#e2e8f0',
+          lineHeight: '1.8',
+          margin: 0
+        }}>
+          This section was added to demonstrate <span style={{ color: '#22c55e', fontWeight: 700 }}>Continuous Integration and Continuous Deployment (CI/CD)</span>.
+          When code is pushed to GitHub, it automatically triggers a new deployment on Netlify and Render.
+          This workflow ensures that updates are delivered quickly and reliably to production!
+        </p>
+      </section>
     </div>
   );
 }

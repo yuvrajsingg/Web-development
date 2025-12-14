@@ -1,33 +1,50 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useAuth } from './src/AuthContext'
 import { ProtectedRoute, PublicRoute } from './src/ProtectedRoute'
-import Home from './components/Home'
-import About from './src/about'
-import Contact from './src/contact'
-import Project from './src/project'
 import Layout from './components/Layout'
-import Services from './src/services'
-import SignIn from './src/SignIn'
-import SignUp from './src/SignUp'
 
+// Lazy load route components for better performance
+const Home = lazy(() => import('./components/Home'))
+const About = lazy(() => import('./src/about'))
+const Contact = lazy(() => import('./src/contact'))
+const Project = lazy(() => import('./src/project'))
+const Services = lazy(() => import('./src/services'))
+const SignIn = lazy(() => import('./src/SignIn'))
+const SignUp = lazy(() => import('./src/SignUp'))
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    minHeight: '100vh',
+    fontSize: '18px',
+    color: '#888'
+  }}>
+    Loading...
+  </div>
+)
 
 const MainRouter = () => {
   // Show portfolio directly without authentication
   return (
     <div>
       <Layout/>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/about" element={<About />} />
-        <Route exact path="/project" element={<Project />} />
-        <Route exact path="/contact" element={<Contact />} />
-        <Route exact path="/services" element={<Services />} />
-        <Route exact path="/signin" element={<SignIn />} />
-        <Route exact path="/signup" element={<SignUp />} />
-      
-        <Route path="*" element={<Home />} />
-      </Routes>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/about" element={<About />} />
+          <Route exact path="/project" element={<Project />} />
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/services" element={<Services />} />
+          <Route exact path="/signin" element={<SignIn />} />
+          <Route exact path="/signup" element={<SignUp />} />
+        
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </Suspense>
     </div>
   )
 }
